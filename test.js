@@ -3,15 +3,15 @@ var assert = require('assert')
 var ancestor = require('./index')
 
 var nodes = {
-  1: {parents: []},
-  2: {parents: [1]},
-  3: {parents: [2]},
-  4: {parents: [2]},
-  5: {parents: [4]},
-  6: {parents: [3,5]},
-  7: {parents: [6]},
-  8: {parents: [5]},
-  9: {parents: [8]}
+  1: [],
+  2: [1],
+  3: [2],
+  4: [2],
+  5: [4],
+  6: [3, 5],
+  7: [6],
+  8: [5],
+  9: [8]
 }
 
 /*
@@ -22,7 +22,7 @@ var nodes = {
 */
 
 var readParents = function(id) {
-  return nodes[id].parents
+  return nodes[id]
 }
 var findAncestor = function(startNodes) { return ancestor(startNodes, readParents) }
 
@@ -31,4 +31,6 @@ it('should find the most recent common ancestor', function() {
   assert.equal(result, 5)
 
   assert.equal(findAncestor([8, 6]), 5)
+  assert.equal(findAncestor([9, 8, 7]), 5)
+  assert.equal(findAncestor([9, 8, 7, 4]), 2) // could be 4 as well...
 })

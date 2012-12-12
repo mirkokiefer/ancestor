@@ -6,7 +6,6 @@ function Walker(startNode) {
   this.queue = [startNode]
 }
 Walker.prototype.merge = function(walker) {
-  this.visited = _.union(this.visited, walker.visited)
   this.queue = _.union(this.queue, walker.queue)
 }
 
