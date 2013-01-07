@@ -32,5 +32,7 @@ it('should find the most recent common ancestor', function() {
 
   assert.equal(findAncestor([8, 6]), 5)
   assert.equal(findAncestor([9, 8, 7]), 5)
-  assert.equal(findAncestor([9, 8, 7, 4]), 2) // could be 4 as well...
+  
+  // could be 4 as well - we should really pick the one with the least average distance:
+  assert.equal(findAncestor([9, 8, 7, 4]), 2)
 })
