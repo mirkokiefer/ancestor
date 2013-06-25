@@ -1,5 +1,5 @@
-#Most recent common ancestor
-an implementation in javascript.
+#Lowest Common Ancestor
+Find the lowest common ancestor for trees in JavaScript.
 
 ``` js
 var findAncestor = require('ancestor')
