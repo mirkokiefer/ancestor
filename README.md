@@ -24,11 +24,12 @@ var nodes = {
 
 */
 
-var readParents = function(id) {
-  return nodes[id]
+var readParents = function(id, cb) {
+  cb(null, nodes[id])
 }
 
-var result = findAncestor([9, 7], readParents)
-// returns:
-5
+findAncestor([9, 7], readParents, function(err, res) {
+  // res = 5
+})
+
 ```
