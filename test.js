@@ -21,18 +21,26 @@ var nodes = {
 
 */
 
-var readParents = function(id) {
-  return nodes[id]
+var readParents = function(id, cb) {
+  cb(null, nodes[id])
 }
-var findAncestor = function(startNodes) { return ancestor(startNodes, readParents) }
 
-it('should find the most recent common ancestor', function() {
-  var result = findAncestor([9, 7])
-  assert.equal(result, 5)
+var assertFindAncestor = function(startNodes, expected, cb) {
+  ancestor(startNodes, readParents, function(err, res) {
+    assert.equal(res, expected)
+    cb()
+  })
+}
 
-  assert.equal(findAncestor([8, 6]), 5)
-  assert.equal(findAncestor([9, 8, 7]), 5)
-  
-  // could be 4 as well - we should really pick the one with the least average distance:
-  assert.equal(findAncestor([9, 8, 7, 4]), 2)
+describe('find the most recent common ancestor', function() {
+  var tests = [
+    {start: [9, 7], expected: 5},
+    {start: [9, 8, 7], expected: 5},
+    {start: [9, 8, 7, 4], expected: 2},
+  ]
+  tests.forEach(function(each, i) {
+    it('should find the common ancestor for test ' + i, function(done) {
+      assertFindAncestor(each.start, each.expected, done)
+    })
+  })
 })
