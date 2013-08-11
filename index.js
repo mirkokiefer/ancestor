@@ -11,6 +11,7 @@ Walker.prototype.merge = function(walker) {
 }
 
 var mostRecentCommonAncestor = function(startNodes, readParents, cb) {
+  if (startNodes.length < 2) return cb(null, startNodes[0])
   var walkers = startNodes.map(function(each) { return new Walker(each) })
   var walkerStack = walkers
   async.whilst(function() { return walkerStack.length }, function(continueCb) {

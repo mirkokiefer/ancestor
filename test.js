@@ -37,6 +37,9 @@ describe('find the most recent common ancestor', function() {
     {start: [9, 7], expected: 5},
     {start: [9, 8, 7], expected: 5},
     {start: [9, 8, 7, 4], expected: 2},
+    {start: [3, 5], expected: 2},
+    {start: [1, 7], expected: 1},
+    {start: [4], expected: 4}
   ]
   tests.forEach(function(each, i) {
     it('should find the common ancestor for test ' + i, function(done) {
