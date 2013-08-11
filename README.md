@@ -1,6 +1,8 @@
 #Lowest Common Ancestor
 [![Build Status](https://travis-ci.org/mirkokiefer/ancestor.png?branch=master)](https://travis-ci.org/mirkokiefer/ancestor)
 
+[![NPM](https://nodei.co/npm/ancestor.png)](https://nodei.co/npm/ancestor/)
+
 Find the lowest common ancestor for trees in JavaScript.
 
 ``` js
