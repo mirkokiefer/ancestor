@@ -3,7 +3,7 @@
 
 [![NPM](https://nodei.co/npm/ancestor.png)](https://nodei.co/npm/ancestor/)
 
-Find the lowest common ancestor for trees in JavaScript.
+Find the lowest common ancestor for directed, acyclic graphs in JavaScript.
 
 ``` js
 var findAncestor = require('ancestor')

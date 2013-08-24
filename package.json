@@ -1,7 +1,7 @@
 {
   "name": "ancestor",
   "version": "0.1.2",
-  "description": "find the lowest common ancestor in a tree",
+  "description": "find the lowest common ancestor in a directed, acyclic graph",
   "main": "index.js",
   "homepage": "https://github.com/mirkokiefer/ancestor",
   "dependencies": {
