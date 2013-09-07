@@ -1,6 +1,6 @@
 {
   "name": "ancestor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "find the lowest common ancestor in a directed, acyclic graph",
   "main": "index.js",
   "homepage": "https://github.com/mirkokiefer/ancestor",
