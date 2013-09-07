@@ -12,9 +12,15 @@ Walker.prototype.merge = function(walker) {
 
 var mostRecentCommonAncestor = function(startNodes, readParents, cb) {
   if (startNodes.length < 2) return cb(null, startNodes[0])
-  var walkers = startNodes.map(function(each) { return new Walker(each) })
-  var walkerStack = walkers
-  async.whilst(function() { return walkerStack.length }, function(continueCb) {
+
+  var walkerStack = startNodes.map(function(each) { return new Walker(each) })
+  
+  function whileCond() {
+    return _.some(walkerStack, function(walker) {
+      return walker.queue.length
+    })
+  }
+  async.whilst(whileCond, function(continueCb) {
     var walker = walkerStack.shift()
     if (walker.queue.length == 0) {
       walkerStack.push(walker)
@@ -34,6 +40,7 @@ var mostRecentCommonAncestor = function(startNodes, readParents, cb) {
     } else {
       walker.visited.push(node)
       readParents(node, function(err, parents) {
+        if (err) parents = []
         walker.queue = walker.queue.concat(parents)
         walkerStack.push(walker)
         continueCb()

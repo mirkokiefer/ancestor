@@ -22,7 +22,11 @@ var nodes = {
 */
 
 var readParents = function(id, cb) {
-  cb(null, nodes[id])
+  process.nextTick(function() {
+    var parents = nodes[id]
+    if (parents === undefined) return cb(new Error('node not found'))
+    cb(null, parents)    
+  })
 }
 
 var assertFindAncestor = function(startNodes, expected, cb) {
@@ -39,7 +43,8 @@ describe('find the most recent common ancestor', function() {
     {start: [9, 8, 7, 4], expected: 2},
     {start: [3, 5], expected: 2},
     {start: [1, 7], expected: 1},
-    {start: [4], expected: 4}
+    {start: [4], expected: 4},
+    {start: [4, null], expected: undefined}
   ]
   tests.forEach(function(each, i) {
     it('should find the common ancestor for test ' + i, function(done) {
