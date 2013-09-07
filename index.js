@@ -6,11 +6,12 @@ function Walker(startNode) {
   this.visited = []
   this.queue = [startNode]
 }
+
 Walker.prototype.merge = function(walker) {
   this.queue = _.union(this.queue, walker.queue)
 }
 
-var mostRecentCommonAncestor = function(startNodes, readParents, cb) {
+function lowestCommonAncestor(startNodes, readParents, cb) {
   if (startNodes.length < 2) return cb(null, startNodes[0])
 
   var walkerStack = startNodes.map(function(each) { return new Walker(each) })
@@ -49,4 +50,4 @@ var mostRecentCommonAncestor = function(startNodes, readParents, cb) {
   }, cb)
 }
 
-module.exports = mostRecentCommonAncestor
+module.exports = lowestCommonAncestor
