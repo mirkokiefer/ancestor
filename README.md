@@ -1,5 +1,7 @@
 # Lowest Common Ancestor
 
+![Test](https://github.com/mirkokiefer/ancestor/actions/workflows/test.yml/badge.svg)
+
 [![NPM](https://nodei.co/npm/ancestor.png)](https://nodei.co/npm/ancestor/)
 
 Find the lowest common ancestor for directed, acyclic graphs in JavaScript.
