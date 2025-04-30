@@ -30,6 +30,15 @@ const ancestor = require('ancestor')
 
 ```js
 const nodes = {1: [], 2: [1], 3: [2], 4: [2], 5: [4], 6: [3,5], 7: [6], 8: [5], 9: [8]}
+
+/* the graph:
+
+    4-5-8-9   
+   /   \
+1-2-3---6-7
+
+*/
+
 const readParents = (id, cb) =>
   process.nextTick(() => cb(null, nodes[id] || []))
 
