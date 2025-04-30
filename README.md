@@ -1,10 +1,10 @@
-# ancestor - Lowest Common Ancestor
+# ancestor.js - Lowest Common Ancestor in JavaScript
 
 ![Test](https://github.com/mirkokiefer/ancestor/actions/workflows/test.yml/badge.svg)
 
 ![npm version](https://badge.fury.io/js/ancestor.svg)
 
-Find the lowest common ancestor in a directed acyclic graph.
+Find the lowest-common-ancestor in a directed acyclic graph (DAG) for JavaScript & TypeScript.
 
 ## Install
 
