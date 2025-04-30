@@ -1,6 +1,5 @@
-
-var _ = require('underscore')
-var async = require('async')
+import _ from 'underscore'
+import async from 'async'
 
 function Walker(startNode) {
   this.visited = []
@@ -11,43 +10,45 @@ Walker.prototype.merge = function(walker) {
   this.queue = _.union(this.queue, walker.queue)
 }
 
-function lowestCommonAncestor(startNodes, readParents, cb) {
+export function lowestCommonAncestor(startNodes, readParents, cb) {
   if (startNodes.length < 2) return cb(null, startNodes[0])
 
-  var walkerStack = startNodes.map(function(each) { return new Walker(each) })
-  
+  const walkerStack = startNodes.map(each => new Walker(each))
+
   function whileCond() {
-    return _.some(walkerStack, function(walker) {
-      return walker.queue.length
-    })
+    return _.some(walkerStack, walker => walker.queue.length)
   }
-  async.whilst(whileCond, function(continueCb) {
-    var walker = walkerStack.shift()
-    if (walker.queue.length == 0) {
-      walkerStack.push(walker)
-      return continueCb()
-    }
-    var node = walker.queue.shift()
-    var walkerWithCommonAncestor = _.find(walkerStack, function(otherWalker) {
-      return _.contains(otherWalker.visited, node)
-    })
-    if (walkerWithCommonAncestor) {
-      if (walkerStack.length == 1) {
-        return cb(null, node)
-      } else {
-        walkerWithCommonAncestor.merge(walker)
-        continueCb()
+
+  async.whilst(
+    whileCond,
+    continueCb => {
+      const walker = walkerStack.shift()
+      if (walker.queue.length === 0) {
+        walkerStack.push(walker)
+        return continueCb()
       }
-    } else {
+
+      const node = walker.queue.shift()
+      const walkerWithCommonAncestor = _.find(
+        walkerStack,
+        other => _.contains(other.visited, node)
+      )
+
+      if (walkerWithCommonAncestor) {
+        if (walkerStack.length === 1) return cb(null, node)
+        walkerWithCommonAncestor.merge(walker)
+        return continueCb()
+      }
+
       walker.visited.push(node)
-      readParents(node, function(err, parents) {
-        if (err) parents = []
-        walker.queue = walker.queue.concat(parents)
+      readParents(node, (err, parents) => {
+        walker.queue = walker.queue.concat(err ? [] : parents)
         walkerStack.push(walker)
         continueCb()
       })
-    }
-  }, cb)
+    },
+    cb
+  )
 }
 
-module.exports = lowestCommonAncestor
+export default lowestCommonAncestor
