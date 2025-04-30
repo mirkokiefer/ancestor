@@ -70,5 +70,5 @@ npm test
 
 ## License
 
-BSD
+MIT
 
