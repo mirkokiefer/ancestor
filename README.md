@@ -62,6 +62,8 @@ export default lowestCommonAncestor
 - **readParents**: callback-based fetch of parent IDs  
 - **cb**: callback with error or the LCA ID  
 
+Add more use cases
+
 ## Test
 
 ```bash
